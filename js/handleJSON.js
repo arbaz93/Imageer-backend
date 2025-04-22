@@ -1,14 +1,24 @@
-const fs = require('fs');
-const path = require('path');
+const fs = require('fs').promises;
 
-function deleteImagesWhoseTimeIsUp() {
-    const jsonPath = path.join(__dirname, '../json/imagesOnPendingForDeletion.json')
-    const rawData = fs.readFileSync(jsonPath);
-
-    const jsonData = JSON.parse(rawData);
-    return jsonData;
+async function writeJsonFile(file, json) {
+    try {
+        await fs.writeFile(file, JSON.stringify(json, null, 4));
+        return { success: true };
+    } catch (err) {
+        return { success: false, err }
+    }
 }
 
+async function readJsonFile(file) {
+    try {
+        const rawData = await fs.readFile(file, 'utf-8');
+        const json = JSON.parse(rawData);
 
+        console.log(json)
+        return { success: true, json };
+    } catch (err) {
+        return { success: false, err }
+    }
+}
 
-module.exports = { deleteImagesWhoseTimeIsUp };
+module.exports = { readJsonFile, writeJsonFile };

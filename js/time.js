@@ -7,4 +7,8 @@ function timeDifference(previousTime) {
     return difference;
 }
 
-module.exports = { timeDifference }
+function monthIsPassedSinceUpload(previousTime) {
+    const isMonthPassed = timeDifference(previousTime) >= msInMonth;
+    return isMonthPassed;
+}
+module.exports = { timeDifference, monthIsPassedSinceUpload }
