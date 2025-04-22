@@ -1,0 +1,9 @@
+// This is a cron job set to run every hour
+// there is an image whose upload time exeeds 30days.
+// 30days = timestamp: 2592000000;
+
+const { deleteImagesWhoseTimeIsUp } = require('./js/cloudinary/cloudinaryAPI');
+
+(async () => {
+    deleteImagesWhoseTimeIsUp();
+})();
