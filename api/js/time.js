@@ -1,4 +1,5 @@
-const msInMonth = 2592000000;
+// const msInMonth = 2592000000;
+const msInMonth = 60000;
 
 function timeDifference(previousTime) {
     const currentTime = Date.now(); 
