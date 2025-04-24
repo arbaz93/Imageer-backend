@@ -5,6 +5,7 @@ async function writeJsonFile(file, json) {
         await fs.writeFile(file, JSON.stringify(json, null, 4));
         return { success: true };
     } catch (err) {
+        console.log(err)
         return { success: false, err }
     }
 }
@@ -14,7 +15,6 @@ async function readJsonFile(file) {
         const rawData = await fs.readFile(file, 'utf-8');
         const json = JSON.parse(rawData);
 
-        console.log(json)
         return { success: true, json };
     } catch (err) {
         return { success: false, err }

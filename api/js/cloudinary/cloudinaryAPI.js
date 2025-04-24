@@ -23,26 +23,22 @@ async function deleteImagesWhoseTimeIsUp() {
     if(!jsonFile.success) return ({ success: false, message: 'cannot read json file.'});
     const json = jsonFile.json;
 
-    json.forEach(imageData => {
+    json.forEach(async (imageData) => {
         const timeIsPassed = monthIsPassedSinceUpload(imageData.timestamp);
         
         console.log('time', timeIsPassed)
         if(timeIsPassed) {
-            const res = deleteImageFromCloudinary(imageData.public_id);
+            const res = await deleteImageFromCloudinary(imageData.public_id);
         } else if(!timeIsPassed) {
             newJson.push(imageData);
         }
     });
 
-    console.log(newJson);
     const updatedJson = await writeJsonFile(jsonPath, newJson);
-
-    console.log('updated json', updatedJson);
 
     return updatedJson;
 }
 async function queueImageForDeletion(imageData) {
-
     const jsonPath = path.join(__dirname, '../../json/imagesOnPendingForDeletion.json')
     const jsonFile = (await readJsonFile(jsonPath));
 
@@ -50,11 +46,9 @@ async function queueImageForDeletion(imageData) {
     const json = jsonFile.json;
     const updatedJson = [...json, imageData];
 
-
     const res = await writeJsonFile(jsonPath, updatedJson);
     
     if (!res.success) return { success: false, message: `failed to add ${imageData.public_id} to queue for deletion!`};
-    console.log(updatedJson);
     
     return { success: true, message: `Add ${imageData.public_id} to queue for deletion!`};
 }
