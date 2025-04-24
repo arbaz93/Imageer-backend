@@ -1,11 +1,20 @@
 const express = require('express');
 const cors = require('cors');
 const { queueImageForDeletion } = require('./js/cloudinary/cloudinaryAPI');
+const path = require('path');
 const app = express();
 const port = 8000;
 
 app.use(cors());
 app.use(express.json());
+
+// Serve static files from the "public" folder
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Optional: Handle root route to serve HTML
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
 app.post('/delete-image-time-month', (req, res) => {
     console.log(req.body)
@@ -20,9 +29,6 @@ app.post('/delete-image-time-month', (req, res) => {
     queueImageForDeletion(imageData);
     
 })
-
-
-
 
 app.listen(port, () => {
     console.log(`server is running at https://localhost:${port}`)
