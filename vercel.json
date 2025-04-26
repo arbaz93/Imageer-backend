@@ -18,11 +18,5 @@
       "src": "/(.*)",
       "dest": "api/index.js"
     }
-  ],
-  "cron": [
-    {
-      "path": "/api/runImageCleanup",
-      "schedule": "0 * * * *"
-    }
   ]
 }
