@@ -1,5 +1,4 @@
 const cloudinary = require('./cloudinary');
-const path = require('path');
 const { monthIsPassedSinceUpload } = require('../time');
 const { writeJsonFile, readJsonFile, deleteFromJsonFile } = require('../handleJSON');
 
