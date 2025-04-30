@@ -38,7 +38,7 @@ app.post('/delete-image-time-month', async (req, res) => {
         res.status(200).json({ success:true, message: queueStat.message });
     } catch (err) {
         console.error(err);
-        res.status(500).json({ success:false, error: 'Internal server error' });
+        res.status(500).json({ success:false, message: 'Internal server error' });
     }
 });
 
