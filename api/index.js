@@ -19,7 +19,6 @@ app.get('/', (req, res) => {
 
 // Handle image deletion request (POST /api/delete-image-time-month)
 app.post('/delete-image-time-month', async (req, res) => {
-    console.log('Recieved body', req.body);
     const imageData = {
         public_id: req.body.id,
         timestamp: req.body.timestamp
@@ -29,7 +28,6 @@ app.post('/delete-image-time-month', async (req, res) => {
     }
     try {
         const queueStat = await queueImageForDeletion(imageData);
-        console.log(queueStat);
 
         if (!queueStat.success) {
             return res.status(500).json({ error: queueStat.message });

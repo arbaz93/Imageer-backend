@@ -5,7 +5,6 @@ const { writeJsonFile, readJsonFile, deleteFromJsonFile } = require('../handleJS
 async function deleteImageFromCloudinary(publicId) {
     try {
         const res = await cloudinary.uploader.destroy(publicId);
-        console.log(res);
 
         return { success: true, res, publicId };
     } catch (err) {
@@ -24,7 +23,6 @@ async function deleteImagesWhoseTimeIsUp() {
     json.forEach(async (imageData) => {
         const timeIsPassed = monthIsPassedSinceUpload(imageData.timestamp);
 
-        console.log('time', timeIsPassed)
         if (timeIsPassed) {
             try {
                 await deleteImageFromCloudinary(imageData.public_id);
@@ -38,13 +36,10 @@ async function deleteImagesWhoseTimeIsUp() {
     });
 }
 async function queueImageForDeletion(imageData) {
-    console.log('qing', imageData);
     try {
-        const res = await writeJsonFile(imageData);
-        const d = await deleteFromJsonFile('imageer_upload/Screenshot_2025-03-02_15-27-11_xflne9');
-        const j = await readJsonFile();
-        console.log(d)
-        console.log(j)
+        await writeJsonFile(imageData);
+        await deleteFromJsonFile('imageer_upload/Screenshot_2025-03-02_15-27-11_xflne9');
+        await readJsonFile();
         return { success: true, message: `Added ${imageData.public_id} to queue for deletion!` };
     } catch (err) {
         return { success: false, message: `failed to add ${imageData.public_id} to queue for deletion!` };

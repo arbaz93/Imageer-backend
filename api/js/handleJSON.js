@@ -18,7 +18,6 @@ async function readJsonFile() {
         const res = await db.collection('imagesPendingForDeletion').get();
         const imageData = res.docs.map(doc => doc.data());
 
-        console.log(imageData)
         return { success: true, imageData };
     } catch (err) {
         return { success: false, err }
