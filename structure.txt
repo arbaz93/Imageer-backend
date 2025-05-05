@@ -1,0 +1,24 @@
+.
+├── api
+│   ├── firebase
+│   │   └── firebase.js
+│   ├── index.js
+│   ├── js
+│   │   ├── cloudinary
+│   │   ├── handleJSON.js
+│   │   └── time.js
+│   ├── json
+│   │   └── imagesOnPendingForDeletion.json
+│   ├── routes
+│   │   ├── convertImages.js
+│   │   └── deleteImages.js
+│   └── runImageCleanup.js
+├── package.json
+├── package-lock.json
+├── public
+│   └── index.html
+├── README.md
+├── structure.txt
+└── vercel.json
+
+7 directories, 14 files

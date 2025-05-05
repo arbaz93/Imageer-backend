@@ -1,6 +1,6 @@
 # Backend - Imageer
 
-This document provides an overview of the backend structure for the **Imageer** project. It handles image uploads, deletions, conversions, and integrations with Firebase and Cloudinary.
+This document provides an overview of the backend structure for the **Imageer** project. It handles image uploads, deletions, and integrations with Firebase and Cloudinary.
 
 ---
 
@@ -9,7 +9,6 @@ This document provides an overview of the backend structure for the **Imageer** 
 The backend of **Imageer** is built with **Express.js** and manages the following tasks:
 
 - Image uploads and storage
-- Image format conversion (supports over 15 formats)
 - Image deletion after 30 days (via **EasyCron** for scheduled tasks)
 - Integration with **Firebase** and **Cloudinary** for image hosting
 - Server-side management of environment variables via **dotenv**
@@ -18,53 +17,22 @@ The backend is deployed on **Vercel**, ensuring efficient scaling and fast deplo
 
 ---
 
-## 🆕 New Features
-
-### 🖼️ Image Format Conversion
-
-Users can now convert uploaded images to a wide range of formats using [**Sharp**](https://sharp.pixelplumbing.com/). The following formats are supported:
-
-- `svg`, `png`, `jpg`, `jpeg`, `jpe`, `gif`, `webp`, `tiff`, `tif`, `avif`, `dz`, `jpx`, `j2k`, `j2c`, `jxl`, `heif`, `heic`, `raw`
-
-### 📤 File Uploads with Multer
-
-The backend uses **Multer** middleware to handle multipart/form-data, enabling efficient and scalable image uploads.
-
-### 🧭 Modular Route Handling
-
-Routes are now organized into a dedicated `/routes/` directory for better maintainability and scalability. Key routes include:
-
-- `convertImages.js`: Handles image format conversion logic.
-- `deleteImages.js`: Handles deletion of expired images.
-
----
-
 ## 📁 Backend Folder Structure
 
-```
-.
-├── api
-│   ├── firebase
-│   │   └── firebase.js
-│   ├── index.js
-│   ├── js
-│   │   ├── cloudinary
-│   │   ├── handleJSON.js
-│   │   └── time.js
-│   ├── json
-│   │   └── imagesOnPendingForDeletion.json
-│   ├── routes
-│   │   ├── convertImages.js
-│   │   └── deleteImages.js
-│   └── runImageCleanup.js
-├── package.json
-├── package-lock.json
-├── public
-│   └── index.html
-├── README.md
-├── structure.txt
-└── vercel.json
-```
+
+### Explanation of Key Directories/Files
+
+- **`/api/`**: Contains all the API logic for the backend, including routes and integration with Firebase and Cloudinary.
+  
+  - **`firebase/`**: Houses Firebase initialization and configurations.
+  
+  - **`js/`**: Contains utility functions for handling image processing, Cloudinary operations, and time-related tasks.
+  
+  - **`json/`**: Stores files used for tracking images that are pending deletion (e.g., `imagesOnPendingForDeletion.json`).
+  
+  - **`runImageCleanup.js`**: This script is responsible for checking which images have exceeded the 30-day retention period and should be deleted.
+  
+- **`vercel.json`**: Vercel configuration file to set up deployment options, routes, and environment variables.
 
 ---
 
@@ -77,8 +45,6 @@ The backend uses the following dependencies:
 - **firebase-admin**: Admin SDK for Firebase, used for cloud storage management.
 - **dotenv**: Loads environment variables from a `.env` file.
 - **cors**: Middleware to enable cross-origin requests.
-- **sharp**: High-performance image processing for format conversion.
-- **multer**: Middleware for handling file uploads.
 
 ---
 
@@ -101,6 +67,7 @@ API_SECRET=<your-cloudinary-api-secret>
 FIREBASE_KEY=<your-firebase-config> 
 ```
 
+
 ---
 
 ## 🕹️ Running the Backend Locally
@@ -111,28 +78,17 @@ To run the backend locally:
 
    ```bash
    git clone https://github.com/arbaz93/Imageer-backend.git
-   cd Imageer-backend
-   ```
-
 2. Install dependencies:
-
-   ```bash
-   npm install
-   ```
-
-3. Set up your environment variables in a `.env` file (based on the example above).
-
-4. Set up your [Firebase](https://firebase.google.com/) account and database. See [Firebase documentation](https://firebase.google.com/docs) for more information.
-
-5. Start the backend server:
-
-   ```bash
-   vercel dev
-   ```
-
+    ```bash
+    npm install
+3. Set up your environment variables in a .env file (based on the example above).
+4. Set up your [Firebase](https://firebase.google.com/) account and [Firebase Database](). See [firebase documentation](https://firebase.google.com/docs?gad_source=1&gbraid=0AAAAADpUDOgoy3kt6mQFyw9yR2vHXBAcs&gclid=Cj0KCQjwoNzABhDbARIsALfY8VMTgznROtXpjkhIJ_ZN52EZN2N4lVAzQsipZ4WeuvB0ki6HvoquQyIaAhibEALw_wcB&gclsrc=aw.ds) for more information.
+5. Start the backend server.
+    ```bash
+    vercel dev
+    ```
 6. The backend will be running on http://localhost:3000.
 
----
 
 ### 🚀 Deployment on Vercel
 
@@ -166,3 +122,12 @@ If you'd like to contribute to the backend:
 ### 📄 License
 
 This project is open-source and available under the [MIT License](LICENSE).
+
+---
+
+### What's New in This Update:
+
+1. **EasyCron Integration**: Added information about using EasyCron for managing periodic tasks.
+2. **Vercel Deployment**: Clarified that the server is deployed on Vercel.
+3. **File Structure**: Updated with the exact file structure you provided.
+4. **Contact Info**: Added a note to contact you for EasyCron access.
