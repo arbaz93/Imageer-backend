@@ -9,7 +9,7 @@ This document provides an overview of the backend structure for the **Imageer** 
 The backend of **Imageer** is built with **Express.js** and manages the following tasks:
 
 - Image uploads and storage
-- Image format conversion (supports over 15 formats)
+- Image format conversion (currently supports over 15 formats)
 - Image deletion after 30 days (via **EasyCron** for scheduled tasks)
 - Integration with **Firebase** and **Cloudinary** for image hosting
 - Server-side management of environment variables via **dotenv**
@@ -147,7 +147,12 @@ You can view the backend's deployed version and status via the **Vercel dashboar
 In the future, the backend can be extended with features like:
 
 - User authentication (for personalized image management)
+
 - Logging and error monitoring (integrating services like Sentry)
+
+- Image resizing (users can specify target width/height or presets)
+
+- Image enhancement (improvements like sharpening, brightness/contrast tuning)
 
 ---
 
@@ -165,4 +170,4 @@ If you'd like to contribute to the backend:
 
 ### 📄 License
 
-This project is open-source and available under the [MIT License](LICENSE).
+This project is open-source and available under the [APACHE 2.0](LICENSE).
