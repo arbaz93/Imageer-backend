@@ -5,8 +5,13 @@ const deleteImagesRoute = require('./routes/deleteImages');
 const convertImagesRoute = require('./routes/convertImages');
 const app = express();
 
+const corsConfig = {
+    origin: 'http://localhost:5173', // or use '*' during dev
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true
+  };
 // CORS and middleware
-app.use(cors({ origin: '*' }));
+app.use(cors(corsConfig));
 app.use(express.json());
 
 // Serve static files from /public
