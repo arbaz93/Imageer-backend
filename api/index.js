@@ -1,12 +1,14 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const deleteImagesRoute = require('./routes/deleteImages');
 const convertImagesRoute = require('./routes/convertImages');
 const app = express();
+const CLIENT_URL = process.env.CLIENT_URL;
 
 const corsConfig = {
-    origin: 'http://localhost:5173', // or use '*' during dev
+    origin: CLIENT_URL, // or use '*' during dev
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true
   };
