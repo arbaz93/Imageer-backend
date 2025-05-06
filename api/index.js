@@ -13,6 +13,8 @@ const corsConfig = {
 // CORS and middleware
 app.use(cors(corsConfig));
 app.use(express.json());
+app.use(express.json({ limit: '100mb' }));
+app.use(express.urlencoded({ extended: true, limit: '100mb' }));
 
 // Serve static files from /public
 app.use(express.static(path.join(__dirname, '..', 'public')));

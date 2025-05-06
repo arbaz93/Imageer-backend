@@ -2,7 +2,12 @@ const express = require('express');
 const sharp = require('sharp');
 const multer = require('multer');
 const router = express.Router();
-const upload = multer();
+const uploadConfig = {
+    limits: {
+        fileSize: 50 * 1024 * 1024 // 50 MB per file, adjust as needed
+    }
+}
+const upload = multer(uploadConfig);
 
 async function convertImage(file, format) {
     try {
@@ -10,8 +15,8 @@ async function convertImage(file, format) {
             .toFormat(format.toLowerCase())
             .toBuffer()
 
-            return convertedImage
-    } catch(err) {
+        return convertedImage
+    } catch (err) {
         console.error(err);
         throw err
     }
@@ -21,7 +26,7 @@ router.post('/convert-images', upload.array('images'), async (req, res) => {
     const filenames = req.files.map((file, i) => {
         const filePath = file.originalname;
         const fileNameWithoutExtension = filePath.replace(/\.[^/.]+$/, '');
-        
+
         return `${fileNameWithoutExtension}.${formats[i]}`;
     });
 
@@ -29,10 +34,10 @@ router.post('/convert-images', upload.array('images'), async (req, res) => {
         const convertedBuffer = await Promise.all(req.files.map((file, i) => convertImage(file, formats[i])))
         console.log(req.data)
         const base64Buffers = convertedBuffer.map(buf => buf.toString('base64'));
-        res.send({ base64Buffers, filenames, formats });     
-    } catch(err) {
+        res.send({ base64Buffers, filenames, formats });
+    } catch (err) {
         console.error('Error during image conversion:', err)
-        res.status(500).send('Error converting images');     
+        res.status(500).send('Error converting images');
     }
 
 })
