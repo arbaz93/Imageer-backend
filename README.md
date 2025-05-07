@@ -22,7 +22,7 @@ The backend is deployed on **Vercel**, ensuring efficient scaling and fast deplo
 
 ### 🖼️ Image Format Conversion
 
-Users can now convert uploaded images to a wide range of formats using [**Sharp**](https://sharp.pixelplumbing.com/). The following formats are supported:
+Users can now convert uploaded images to a wide range of formats using [**Sharp**](https://sharp.pixelplumbing.com/). The following formats are supported: 
 
 - `svg`, `png`, `jpg`, `jpeg`, `jpe`, `gif`, `webp`, `tiff`, `tif`, `avif`, `dz`, `jpx`, `j2k`, `j2c`, `jxl`, `heif`, `heic`, `raw`
 
