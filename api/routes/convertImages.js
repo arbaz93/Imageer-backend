@@ -42,7 +42,6 @@ router.post('/convert-images', upload.array('images'), async (req, res) => {
 
     try {
         const convertedBuffer = await Promise.all(req.files.map((file, i) => convertImage(file, formats[i])))
-        console.log(req.data)
         const base64Buffers = convertedBuffer.map(buf => buf.toString('base64'));
         res.send({ base64Buffers, filenames, formats });
     } catch (err) {
